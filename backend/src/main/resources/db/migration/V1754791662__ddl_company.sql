@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS company.companies (
     cnpj VARCHAR NOT NULL,
     slug VARCHAR NOT NULL,
     password TEXT NOT NULL,
-    status VARCHAR NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'blocked')),
+    status VARCHAR NOT NULL DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'INACTIVE', 'BLOCKED')),
     contact_full_name VARCHAR NOT NULL,
     contact_email VARCHAR NOT NULL,
     contact_phone VARCHAR NOT NULL,
