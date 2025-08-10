@@ -11,5 +11,7 @@ RUN npm run build -- --configuration=$BUILD_CONFIG
 FROM nginx:1.29-alpine
 COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+LABEL maintainer="Wesley Brito <wesley.brito@evig.com.br>"
 EXPOSE 80
+LABEL maintainer="Wesley Brito <wesley.brito@evig.com.br>"
 CMD ["nginx","-g","daemon off;"]
