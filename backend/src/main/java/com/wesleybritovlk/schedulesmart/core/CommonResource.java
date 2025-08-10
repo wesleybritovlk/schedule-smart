@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.context.request.WebRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,15 +33,26 @@ public class CommonResource {
     }
 
     public static Map<String, Object> toMessage(String message) {
-        return hashMap(simpleEntry("message", message));
+        return hashMap(entry("message", message));
     }
 
     public static Map<String, Object> toMessage(String message, Object data) {
-        return linkedMap(simpleEntry("message", message), simpleEntry("data", data));
+        return linkedMap(entry("message", message), entry("data", data));
     }
 
     public static Map<String, Object> toData(Object data) {
-        return hashMap(simpleEntry("data", data));
+        return hashMap(entry("data", data));
+    }
+
+    public static <T> Map<String, Object> toPage(Page<T> page) {
+        return linkedMap(entry("data", page.getContent()),
+                entry("current_page", page.getNumber()),
+                entry("page_size", page.getSize()),
+                entry("total_pages", page.getTotalPages()),
+                entry("total_elements", page.getTotalElements()),
+                entry("is_first", page.isFirst()),
+                entry("is_last", page.isLast()),
+                entry("empty", page.isEmpty()));
     }
 
     public static Map<String, Object> toJsonMap(String jsonStr) {
@@ -73,7 +85,7 @@ public class CommonResource {
         }
     }
 
-    public static <K, V> SimpleEntry<K, V> simpleEntry(K key, V value) {
+    public static <K, V> SimpleEntry<K, V> entry(K key, V value) {
         return new SimpleEntry<>(key, value);
     }
 

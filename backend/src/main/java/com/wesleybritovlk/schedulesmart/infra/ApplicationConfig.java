@@ -14,8 +14,10 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.HandlerMethod;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.IntegerSchema;
@@ -35,6 +37,12 @@ public class ApplicationConfig {
         private String appName;
         @Value("${spring.application.version}")
         private String appVersion;
+        @Value("${spring.application.description}")
+        private String appDescription;
+        @Value("${spring.application.contact.name}")
+        private String appContactName;
+        @Value("${spring.application.contact.email}")
+        private String appContactEmail;
 
         private static final Stream<Class<?>> HEADER_PARAMETER_TYPES = Stream.of(
                         WebRequest.class, HttpServletRequest.class, JwtAuthenticationToken.class);
@@ -43,8 +51,12 @@ public class ApplicationConfig {
         OpenAPI openAPI() {
                 return new OpenAPI().info(new Info()
                                 .title("%s Documentation".formatted(appName))
-                                .version(appVersion))
-                                .components(new io.swagger.v3.oas.models.Components()
+                                .version(appVersion)
+                                .description(appDescription)
+                                .contact(new Contact()
+                                                .name(appContactName)
+                                                .email(appContactEmail)))
+                                .components(new Components()
                                                 .addSecuritySchemes("Bearer Authentication",
                                                                 new SecurityScheme()
                                                                                 .type(SecurityScheme.Type.HTTP)

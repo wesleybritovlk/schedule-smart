@@ -24,7 +24,10 @@ import lombok.val;
 public class SecurityConfig {
     private static final String[] SWAGGER_WHITE_LIST = { "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**" };
 
-    private static final List<String> ORIGIN_LIST = List.of();
+    private static final List<String> ORIGIN_LIST = List.of(
+        "http://localhost:4200",
+        "http://localhost:8081"
+    );
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
