@@ -6,7 +6,7 @@ import org.mapstruct.ReportingPolicy;
 
 import com.wesleybritovlk.schedulesmart.app.company.CompanyRequest;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AuthMapper {
     @Mapping(target = "password", source = "password")
     CompanyRequest.Auth toCompanyRequest(AuthRequest.CompanyRegister request, String password);

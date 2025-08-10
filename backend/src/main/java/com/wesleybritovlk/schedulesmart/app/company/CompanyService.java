@@ -33,7 +33,7 @@ class CompanyServiceImpl implements CompanyService {
         val jwt = authentication.getToken();
         val subject = jwt.getSubject();
         log.info("Fetching company details for subject: {}", subject);
-        val company = repository.findByCnpjAndDeletedAtIsNull(subject)
+        val company = repository.findByDeletedAtIsNullAndCnpj(subject)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found"));
         return mapper.toResponse(company);
     }

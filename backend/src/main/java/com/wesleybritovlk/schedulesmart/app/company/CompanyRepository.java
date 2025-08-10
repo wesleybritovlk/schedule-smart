@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CompanyRepository extends JpaRepository<CompanyEntity, UUID> {
 
-    Optional<CompanyEntity> findByCnpjAndDeletedAtIsNull(String cnpj);
+    Optional<CompanyEntity> findByDeletedAtIsNullAndCnpj(String cnpj);
+
+    boolean existsByDeletedAtIsNullAndCnpjOrSlug(String cnpj, String slug);
 
 }
