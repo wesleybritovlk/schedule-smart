@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
@@ -27,16 +28,16 @@ public interface AuthController {
     @Operation(summary = "Login a company")
     @ApiResponse(responseCode = "200", description = "Successful company login", content = @Content(schemaProperties = {
             @SchemaProperty(name = "message", schema = @Schema(type = "string", example = "Success company login")),
-            @SchemaProperty(name = "data", schema = @Schema(type = "object"))
+            @SchemaProperty(name = "data", schema = @Schema(type = "object", implementation = AuthResponse.Token.class))
     }))
-    ResponseEntity<Map<String, Object>> loginCompany(Object request);
+    ResponseEntity<Map<String, Object>> loginCompany(AuthRequest.CompanyLogin request);
 
     @Operation(summary = "Register a company")
     @ApiResponse(responseCode = "200", description = "Successful company registration", content = @Content(schemaProperties = {
             @SchemaProperty(name = "message", schema = @Schema(type = "string", example = "Success company registration")),
-            @SchemaProperty(name = "data", schema = @Schema(type = "object"))
+            @SchemaProperty(name = "data", schema = @Schema(type = "object", implementation = AuthResponse.Token.class))
     }))
-    ResponseEntity<Map<String, Object>> registerCompany(Object request);
+    ResponseEntity<Map<String, Object>> registerCompany(AuthRequest.CompanyRegister request);
 
     ResponseEntity<Map<String, Object>> loginUser(Object request);
 
@@ -44,7 +45,7 @@ public interface AuthController {
 
     @Operation(summary = "Refresh authentication token")
     @ApiResponse(responseCode = "200", description = "Successful token refresh", content = @Content(schemaProperties = {
-            @SchemaProperty(name = "data", schema = @Schema(type = "object"))
+            @SchemaProperty(name = "data", schema = @Schema(type = "object", implementation = AuthResponse.Token.class))
     }))
     ResponseEntity<Map<String, Object>> refresh(JwtAuthenticationToken authentication);
 }
@@ -56,16 +57,17 @@ class AuthControllerImpl implements AuthController {
     private final AuthService service;
 
     @Override
-    @PostMapping("company/login")
-    public ResponseEntity<Map<String, Object>> loginCompany(@RequestBody Object request) {
+    @PostMapping("login/company")
+    public ResponseEntity<Map<String, Object>> loginCompany(@Valid @RequestBody AuthRequest.CompanyLogin request) {
         val response = service.loginCompany(request);
         val resource = CommonResource.toMessage("Success company login", response);
         return ResponseEntity.ok(resource);
     }
 
     @Override
-    @PostMapping("company/register")
-    public ResponseEntity<Map<String, Object>> registerCompany(@RequestBody Object request) {
+    @PostMapping("register/company")
+    public ResponseEntity<Map<String, Object>> registerCompany(
+            @Valid @RequestBody AuthRequest.CompanyRegister request) {
         val response = service.registerCompany(request);
         val resource = CommonResource.toMessage("Success company registration", response);
         return ResponseEntity.status(HttpStatus.CREATED).body(resource);
