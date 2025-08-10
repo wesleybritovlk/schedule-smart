@@ -3,8 +3,8 @@ package com.wesleybritovlk.schedulesmart.infra;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class ApplicationConfig {
         @Value("${spring.application.contact.email}")
         private String appContactEmail;
 
-        private static final Stream<Class<?>> HEADER_PARAMETER_TYPES = Stream.of(
+        private static final List<Class<?>> HEADER_PARAMETER_TYPES = List.of(
                         WebRequest.class, HttpServletRequest.class, JwtAuthenticationToken.class);
 
         @Bean
@@ -79,7 +79,7 @@ public class ApplicationConfig {
                 return (Operation operation, HandlerMethod handlerMethod) -> {
                         boolean hasWebRequestOrHttpRequest = handlerMethod.getMethodParameters() != null &&
                                         Arrays.stream(handlerMethod.getMethodParameters())
-                                                        .anyMatch(param -> HEADER_PARAMETER_TYPES
+                                                        .anyMatch(param -> HEADER_PARAMETER_TYPES.stream()
                                                                         .anyMatch(hpt -> Objects.equals(hpt,
                                                                                         param.getParameterType())));
                         if (hasWebRequestOrHttpRequest) {
