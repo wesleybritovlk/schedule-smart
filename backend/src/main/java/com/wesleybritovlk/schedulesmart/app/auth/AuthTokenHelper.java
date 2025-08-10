@@ -1,6 +1,8 @@
 package com.wesleybritovlk.schedulesmart.app.auth;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,24 +14,39 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 
+public interface AuthTokenHelper {
+    AuthResponse.Token generateToken(String subject, Map<String, Object> otherClaims);
+}
+
 @Component
 @RequiredArgsConstructor
-public class AuthTokenHelper {
+class AuthTokenHelperImpl implements AuthTokenHelper {
     private final JwtEncoder jwtEncoder;
 
-    private String createToken(UUID id, String subject, Map<String, Object> otherClaims) {
+    private static final Long TTL_SECONDS = 1800L;
+    private static final List<String> IGNORED_KEYS = List.of("sub", "exp", "iat", "jti");
+
+    private Map<String, Object> sanitizeClaim(Map<String, Object> claims) {
+        val sanitized = new HashMap<String, Object>(claims);
+        IGNORED_KEYS.forEach(sanitized::remove);
+        return sanitized;
+    }
+
+    private String createToken(String subject, Map<String, Object> otherClaims) {
         val instant = Instant.now();
         val jwtClaims = JwtClaimsSet.builder()
-                .id(id.toString())
+                .id(UUID.randomUUID().toString())
                 .subject(subject)
                 .issuedAt(instant)
-                .expiresAt(instant.plusSeconds(3600))
+                .expiresAt(instant.plusSeconds(TTL_SECONDS))
                 .claims(claims -> claims.putAll(otherClaims))
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(jwtClaims)).getTokenValue();
     }
 
-    public String generateToken(UUID id, String subject, Map<String, Object> claims) {
-        return createToken(id, subject, claims);
+    public AuthResponse.Token generateToken(String subject, Map<String, Object> otherClaims) {
+        val filteredClaims = sanitizeClaim(otherClaims);
+        val token = createToken(subject, filteredClaims);
+        return new AuthResponse.Token(token, TTL_SECONDS);
     }
 }
