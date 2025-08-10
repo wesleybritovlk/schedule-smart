@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spring.application.description",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.application.description'"
+  },
+  {
+    "name": "spring.application.contact.name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.application.contact.name'"
+  },
+  {
+    "name": "spring.application.contact.email",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.application.contact.email'"
+  }
+]}
