@@ -17,8 +17,8 @@ export interface Info {
   providedIn: 'root'
 })
 export class InfoService {
-  private apiUrl = environment.api_url;
-  private http = inject(HttpClient);
+  readonly apiUrl = environment.api_url;
+  readonly http = inject(HttpClient);
 
   constructor() { }
 
