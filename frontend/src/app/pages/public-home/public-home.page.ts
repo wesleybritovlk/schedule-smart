@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-public-home',
   imports: [RouterLink],
   template: `
-    <section class="fade-wrapper min-h-screen min-w-screen bg-white flex items-center justify-center px-6 md:px-12 lg:px-24">
+    <section class="fade-wrapper min-h-[calc(100vh-4rem)] min-w-[calc(100vw-1rem)] bg-white flex items-center justify-center px-6 md:px-12 lg:px-24">
       <div class="text-center max-w-xl">
         <h1 class="text-4xl font-bold text-gray-800 mb-4">Bem-vindo à Plataforma</h1>
         <p class="text-lg text-gray-600 mb-6">

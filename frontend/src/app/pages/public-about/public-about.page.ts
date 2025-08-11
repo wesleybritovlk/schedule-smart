@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-public-about',
   imports: [],
   template: `
-    <section class="fade-wrapper min-h-screen min-w-screen bg-white flex items-center justify-center px-6 md:px-12 lg:px-24">
+    <section class="fade-wrapper min-h-[calc(100vh-4rem)] min-w-[calc(100vw-1rem)] bg-white flex items-center justify-center px-6 md:px-12 lg:px-24">
       <div class="max-w-5xl w-full text-center">
         <h2 class="text-4xl font-bold text-gray-800 mb-6">📌 Sobre a Plataforma</h2>
         <p class="text-lg text-gray-600 mb-12">
