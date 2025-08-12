@@ -51,7 +51,7 @@ public class SecurityConfig {
 
     private static final List<String> ORIGIN_LIST = List.of(
             "http://localhost:4200",
-            "http://localhost:8081");
+            "http://localhost:8100");
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
