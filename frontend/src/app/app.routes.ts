@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { slugExistenceGuard, slugMatcher } from './guards/slug-existence-guard';
+import { authCompanyGuard } from './guards/auth-company-guard';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,15 @@ export const routes: Routes = [
         path: 'painel',
         loadComponent: () => import('./layouts/company-layout/company-layout').then(m => m.CompanyLayout),
         loadChildren: () => Promise.resolve([
+            {
+                path: '',
+                canActivate: [authCompanyGuard],
+                loadComponent: () => import('./pages/company-dashboard/company-dashboard.page').then(m => m.CompanyDashboardPage)
+            },
+            {
+                path: 'entrar',
+                loadComponent: () => import('./pages/company-auth/company-auth.page').then(m => m.CompanyAuthPage)
+            }
         ])
     },
     {
