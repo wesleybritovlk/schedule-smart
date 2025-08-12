@@ -1,27 +1,37 @@
 import { Injectable } from '@angular/core';
+import { AuthScope } from './scope.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  setAccessToken(token: string): void {
-    localStorage.setItem('access_token', token);
+  private getKey(scope: AuthScope, type: 'token' | 'exp'): string {
+    return `${scope}_access_${type}`;
   }
 
-  getAccessToken(): string | null {
-    return localStorage.getItem('access_token');
+  setToken(scope: AuthScope, token: string, expiresInSeconds: number) {
+    const expiresAt = Date.now() + expiresInSeconds * 1000;
+    localStorage.setItem(this.getKey(scope, 'token'), token);
+    localStorage.setItem(this.getKey(scope, 'exp'), String(expiresAt));
   }
 
-  setRefreshToken(token: string): void {
-    localStorage.setItem('refresh_token', token);
+  getToken(scope: AuthScope): string | null {
+    return localStorage.getItem(this.getKey(scope, 'token'));
   }
 
-  getRefreshToken(): string | null {
-    return localStorage.getItem('refresh_token');
+  getExpiresAt(scope: AuthScope): number | null {
+    const raw = localStorage.getItem(this.getKey(scope, 'exp'));
+    return raw ? Number(raw) : null;
   }
 
-  clearTokens(): void {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+  hasValidToken(scope: AuthScope): boolean {
+    const token = this.getToken(scope);
+    const exp = this.getExpiresAt(scope);
+    return !!token && typeof exp === 'number' && Date.now() < exp;
+  }
+
+  clearToken(scope: AuthScope) {
+    localStorage.removeItem(this.getKey(scope, 'token'));
+    localStorage.removeItem(this.getKey(scope, 'exp'));
   }
 }
