@@ -5,9 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-company-layout',
   imports: [RouterOutlet],
   template: `
-    <p>
-      company-layout works!
-    </p>
     <router-outlet></router-outlet>
   `,
   styleUrl: './company-layout.scss'

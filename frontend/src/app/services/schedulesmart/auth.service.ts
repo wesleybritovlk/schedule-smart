@@ -89,7 +89,10 @@ export class AuthService {
   }
 
   isLoggedIn(scope: AuthScope): boolean {
-    return this.tokens.hasValidToken(scope);
+    const isValid = this.tokens.hasValidToken(scope);
+    if (isValid)
+      this.scopes.set(scope);
+    return isValid;
   }
 
 }
