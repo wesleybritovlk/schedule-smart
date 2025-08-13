@@ -1,0 +1,10 @@
+@if (toastMessage()) {
+<div class="p-4 rounded-2xl text-white font-medium" [class.bg-green-600]="toastSuccess()"
+    [class.bg-red-600]="!toastSuccess()">
+    {{ toastMessage() }}
+
+    @if (!toastSuccess() && toastError()) {
+    <div class="mt-2 text-sm text-red-100">{{ toastError() }}</div>
+    }
+</div>
+}

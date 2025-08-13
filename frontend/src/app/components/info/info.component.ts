@@ -1,14 +1,12 @@
-import { NgClass } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { InfoService } from '../../services/schedulesmart/info.service';
-
 @Component({
   selector: 'app-info',
-  imports: [NgClass],
-  templateUrl: './info.html',
-  styleUrl: './info.scss'
+  imports: [],
+  templateUrl: './info.component.html',
+  styleUrl: './info.component.scss'
 })
-export class Info implements OnInit {
+export class InfoComponent implements OnInit {
   readonly infoService = inject(InfoService);
 
   apiStatus = signal('DOWN');
