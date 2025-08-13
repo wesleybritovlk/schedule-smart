@@ -4,21 +4,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-public-home',
   imports: [RouterLink],
-  template: `
-    <section class="fade-wrapper min-h-[calc(100vh-4rem)] min-w-[calc(100vw-1rem)] bg-white flex items-center justify-center px-6 md:px-12 lg:px-24">
-      <div class="text-center max-w-xl">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Bem-vindo à Plataforma</h1>
-        <p class="text-lg text-gray-600 mb-6">
-          Conectamos empresas e clientes em um só lugar. Comece agora a explorar o que temos para oferecer.
-        </p>
-        <div class="flex justify-center gap-4">
-          <a [routerLink]="['/painel']" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-            Painel da Empresa
-          </a>
-        </div>
-      </div>
-    </section>
-  `,
+  templateUrl: './public-home.page.html',
   styleUrl: './public-home.page.scss'
 })
 export class PublicHomePage {

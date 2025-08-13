@@ -4,9 +4,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-company-layout',
   imports: [RouterOutlet],
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './company-layout.html',
   styleUrl: './company-layout.scss'
 })
 export class CompanyLayout {

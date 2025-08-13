@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { slugExistenceGuard, slugMatcher } from './guards/slug-existence-guard';
 import { authCompanyGuard } from './guards/auth-company-guard';
+import { slugExistenceGuard, slugMatcher } from './guards/slug-existence-guard';
 
 export const routes: Routes = [
     {
@@ -41,4 +41,3 @@ export const routes: Routes = [
     },
     { path: '**', loadComponent: () => import('./components/not-found/not-found.component').then(m => m.NotFoundComponent) },
 ];
-

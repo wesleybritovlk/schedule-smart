@@ -6,15 +6,7 @@ import { PublicNavbarComponent } from '../../components/public-navbar/public-nav
 @Component({
   selector: 'app-public-layout',
   imports: [RouterOutlet, PublicNavbarComponent, PublicFooterComponent],
-  template: `
-    <app-public-navbar></app-public-navbar>
-      <main class="flex-1 flex items-center justify-center bg-gray-5">
-        <div class="fade-wrapper">
-          <router-outlet></router-outlet>
-        </div>
-      </main>
-    <app-public-footer></app-public-footer>
-  `,
+  templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss'
 })
 export class PublicLayout {

@@ -4,8 +4,8 @@ import { CanActivateFn } from '@angular/router';
 import { slugExistenceGuard } from './slug-existence-guard';
 
 describe('slugExistenceGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => slugExistenceGuard(...guardParameters));
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => slugExistenceGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
