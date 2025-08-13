@@ -33,6 +33,7 @@
 		<springdoc.version>2.8.9</springdoc.version>
 		<org.mapstruct.version>1.6.3</org.mapstruct.version>
 		<lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
+		<bouncycastle.version>1.78.1</bouncycastle.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -101,6 +102,11 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk18on</artifactId>
+			<version>${bouncycastle.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

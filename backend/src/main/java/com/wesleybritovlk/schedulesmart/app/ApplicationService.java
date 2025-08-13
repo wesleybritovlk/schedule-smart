@@ -1,6 +1,8 @@
 package com.wesleybritovlk.schedulesmart.app;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -42,10 +44,17 @@ class ApplicationServiceImpl implements ApplicationService {
                 CommonResource.entry("documentation_swagger", requestUrl + "docs"),
                 CommonResource.entry("documentation_redoc", requestUrl + "redoc"),
                 CommonResource.entry("api", "UP"));
-        try (val connection = dataSource.getConnection()) {
-            status.put("database", "UP");
+        try {
+            val future = CompletableFuture.runAsync(() -> {
+                try (val conn = dataSource.getConnection()) {
+                    status.put("database", "UP");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            future.get(1, TimeUnit.SECONDS);
         } catch (Exception e) {
-            log.error("Database connection failed", e);
+            log.error("Database connection failed: {}", e.getMessage());
             status.put("database", "DOWN");
         }
         return status;

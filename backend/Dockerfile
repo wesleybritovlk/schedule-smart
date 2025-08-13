@@ -11,7 +11,9 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN apk update && apk upgrade && apk add --no-cache curl
+COPY entrypoint.sh /app/entrypoint.sh
+RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 COPY --from=build /build/target/schedulesmart*.jar /app/app.jar
 LABEL maintainer="Wesley Brito <wesley.brito@evig.com.br>"
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["/app/entrypoint.sh"]
