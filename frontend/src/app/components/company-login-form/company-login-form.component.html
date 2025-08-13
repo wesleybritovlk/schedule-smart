@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+  <h2 class="text-2xl font-bold text-center text-gray-800">
+    Faça login para gerenciar sua empresa
+  </h2>
+  <p class="text-center text-gray-500 text-sm">
+    Visualize todos os seus agendamentos com performance e segurança
+  </p>
+  <div>
+    <label for="cnpj" class="block text-sm font-medium text-gray-700 mb-1">
+      CNPJ
+    </label>
+    <input id="cnpj" formControlName="cnpj" type="text"
+      class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="00.000.000/0000-00" />
+    @if (showCNPJError()) {
+    <span class="text-red-600 text-sm">CNPJ inválido</span>
+    }
+  </div>
+  <div>
+    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+    <input id="password" formControlName="password" type="password"
+      class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="••••••••" />
+    @if (showPasswordError()) {
+    <span class="text-red-600 text-sm">Senha obrigatória</span>
+    }
+  </div>
+  <button type="submit" [disabled]="form.invalid || isSubmitting()"
+    class="w-full py-2 px-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-gray-400 transition">
+    Entrar
+  </button>
+  <div class="text-center">
+    <a href="/esqueci-senha" class="text-blue-600 hover:underline text-sm">
+      Esqueci minha senha
+    </a>
+  </div>
+  <div class="text-center pt-4 border-t border-gray-200">
+    <p class="text-sm text-gray-600">Não tem login?</p>
+    <button type="button" (click)="registerClick.emit()"
+      class="mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
+      Registre-se agora
+    </button>
+  </div>
+</form>

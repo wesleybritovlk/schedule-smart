@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { CompanyAuthLoginComponent } from '../../components/company-auth-login/company-auth-login.component';
+import { CompanyAuthPanelComponent } from '../../components/company-auth-panel/company-auth-panel.component';
+import { CompanyBluePanelComponent } from '../../components/company-blue-panel/company-blue-panel.component';
 
 @Component({
   selector: 'app-company-auth',
-  imports: [CompanyAuthLoginComponent],
-  template: `<app-company-auth-login></app-company-auth-login>`,
+  imports: [CompanyAuthPanelComponent, CompanyBluePanelComponent],
+  templateUrl: './company-auth.page.html',
   styleUrl: './company-auth.page.scss'
 })
 export class CompanyAuthPage {

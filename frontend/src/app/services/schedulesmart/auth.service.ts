@@ -43,6 +43,7 @@ export class AuthService {
   constructor() { }
 
   companyLogin(body: CompanyLogin): Observable<Token> {
+    this.tokens.clearToken('company');
     return this.http.post<Response<Token>>(`${this.apiUrl}${this.version}${this.path}/login/company`, body)
       .pipe(
         map(res => res.data),
@@ -55,6 +56,7 @@ export class AuthService {
   }
 
   companyRegister(body: CompanyRegister): Observable<Token> {
+    this.tokens.clearToken('company');
     return this.http.post<Response<Token>>(`${this.apiUrl}${this.version}${this.path}/register/company`, body)
       .pipe(
         map(res => res.data),
