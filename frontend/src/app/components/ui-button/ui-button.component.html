@@ -1,0 +1,33 @@
+<button [attr.type]="type()" [disabled]="disabled() || loading()" [class]="classes()" [attr.aria-busy]="loading()"
+    [attr.aria-label]="ariaLabel() || label() || null" (click)="onClick($event)">
+    @if (iconPosition() !== 'right') {
+        @if (iconTpl) {
+            <ng-container *ngTemplateOutlet="iconTpl"></ng-container>
+        } @else {
+            @if (icon() && iconPosition() !== 'right') {
+                <i class="icon">{{ icon() }}</i>
+            }
+        }
+    }
+    @if (iconPosition() !== 'only') {
+        @if (label()) {
+            {{ label() }}
+        } @else {
+            <ng-content></ng-content>
+        }
+    }
+    @if (iconPosition() === 'right') {
+        @if (iconTpl) {
+            <ng-container *ngTemplateOutlet="iconTpl"></ng-container>
+        } @else {
+            @if (icon()) {
+                <i class="icon">{{ icon() }}</i>
+            }
+        }
+    }
+    @if (loading()) {
+        <span class="ml-2 inline-flex items-center">
+            <span class="animate-spin rounded-full border-current border-t-transparent" [class]="spinnerClasses()"></span>
+        </span>
+    }
+</button>
