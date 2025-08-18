@@ -1,0 +1,12 @@
+<div class="flex items-center justify-between w-96 h-18 p-6 rounded-2xl"
+    [class]="data.success ? 'bg-green-500' : 'bg-red-500'">
+    <span class="text-lg mr-2"> {{ data.message }} </span>
+    <ui-button
+        [label]="'Fechar'"
+        [type]="'button'"
+        [color]="data.success ? 'success' : 'danger'"
+        [variant]="'solid'"
+        [block]="false"
+        (btnClick)="snackBarRef.dismiss()"
+    ></ui-button>
+</div>

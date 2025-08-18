@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  font-family: sans-serif;
+}
+
+.toast-snackbar-container .mdc-snackbar__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
