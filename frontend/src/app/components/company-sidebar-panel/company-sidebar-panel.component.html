@@ -1,0 +1,22 @@
+<aside
+    class="fixed left-8 top-8 bottom-8 w-64 bg-white rounded-2xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="w-16 h-14 bg-gray-600 rounded"></div>
+        <span class="text-xl font-bold text-gray-700">Minha Empresa</span>
+    </div>
+    <nav class="flex flex-col gap-1">
+        @for (item of items; track item.label) {
+            <ui-link
+                [label]="item.label"
+                [routerLink]="item.routerLink"
+                [color]="'neutralPrimary'"
+                [variant]="'ghost'"
+                [block]="false">
+            </ui-link>
+        }
+    </nav>
+    <div class="pt-4 border-t border-gray-200 mt-4">
+        <ui-button [label]="'Log Out'" [color]="'danger'" [variant]="'outline'" [block]="true"
+            (btnClick)="onLogout()"></ui-button>
+    </div>
+</aside>

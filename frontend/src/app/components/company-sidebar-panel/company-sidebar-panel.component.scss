@@ -1,0 +1,14 @@
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+mat-sidenav {
+  min-width: 64px;
+  border-right: 2px solid #e5e7eb;
+  border-radius: 1rem;
+}
+
+mat-list-item {
+  width: 100%;
+  border-radius: 0.75rem;
+}
