@@ -1,0 +1,20 @@
+<div class="w-full" [style.margin]="getMargin()">
+  <label [for]="getUniqueId()" class="block text-sm font-medium text-gray-700 mb-1">{{ label }}@if (required) { * }
+  </label>
+  <div class="relative">
+    @if (prefix) {
+    <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-500">{{ prefix }}</span>
+    }
+    <input [id]="getUniqueId()" [type]="inputType" [value]="value" [placeholder]="placeholder" [mask]="mask"
+      [required]="required" [attr.autocomplete]="autocomplete" [attr.readonly]="readOnly ? 'readonly' : null"
+      (input)="onInputChange($event)" [formControl]="control"
+      class="w-full {{ small ? 'px-2 py-0.5' : 'px-3 py-1' }} border border-gray-300 rounded-md text-base focus:outline-none {{ background ? 'bg-gray-100' : '' }}"
+      [style.padding-left]="prefix ? '2rem' : getPadding()" />
+  </div>
+  @if (control?.touched && control?.errors) {
+  <span class="block text-red-600 text-sm mt-1">
+    @if (required) { Campo {{ label }} obrigatório }
+    @else { Erro no campo }
+  </span>
+  }
+</div>
