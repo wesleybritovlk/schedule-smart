@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/schedulesmart/auth.service';
+import { UiInputComponent } from '../ui-input/ui-input.component';
+import { UiButtonComponent } from '../ui-button/ui-button.component';
+import { UiLinkComponent } from "../ui-link/ui-link.component";
 
 @Component({
   selector: 'app-company-login-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, UiInputComponent, UiButtonComponent, RouterLink, UiLinkComponent],
   templateUrl: './company-login-form.component.html',
   styleUrl: './company-login-form.component.scss'
 })
@@ -44,7 +47,7 @@ export class CompanyLoginFormComponent implements OnInit {
 
   emitToastError(msg?: string) {
     this.toastChange.emit({
-      message: '❌ Erro ao registrar',
+      message: '❌ Erro ao logar',
       success: false,
       error: msg || 'Falha desconhecida'
     });
